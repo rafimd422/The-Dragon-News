@@ -20,7 +20,7 @@ const NavLinks = <>
 
 
   return (
-<div className="navbar bg-base-100">
+<div className="navbar bg-base-100 mb-8">
   <div className="navbar-start">
     <div className="dropdown">
       <label tabIndex={0} className="btn btn-ghost md:hidden">
@@ -42,7 +42,7 @@ const NavLinks = <>
           <img src={userDefaultPic} />
         </div>
       </label>
-    <a className="btn">Log In</a>
+    <a className="btn hover:bg-black bg-neutral-700 text-teal-50">Log In</a>
   </div>
 </div>
   )

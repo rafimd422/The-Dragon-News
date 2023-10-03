@@ -1,10 +1,29 @@
-import React from 'react'
-
+import Header from './ShereAble/Header'
+import Navbar from './ShereAble/Navbar'
+import LeftSideNav from './LeftSideNav/LeftSideNav';
+import RightSideNav from './ShereAble/RightSideNav/RightSideNav';
 const Home = () => {
   return (
-    <div>
-      This is Home
+    <>
+   <div>
+      <Header />
+      <Navbar />
+      <div className='text-4xl font-poppins font-bold'>
+        This is Home
+      </div>
+
+      <div className='grid md:grid-cols-4 mx-auto'>
+        <div>
+          <LeftSideNav />
+        </div>
+        <div className='md:col-span-2'>News Are coming broo</div>
+        <div>
+          <RightSideNav />
+        </div>
+      </div>
     </div>
+    
+    </>
   )
 }
 

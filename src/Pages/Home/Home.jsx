@@ -1,12 +1,14 @@
-import Header from './ShereAble/Header'
-import Navbar from './ShereAble/Navbar'
-import LeftSideNav from './LeftSideNav/LeftSideNav';
-import RightSideNav from './ShereAble/RightSideNav/RightSideNav';
+import Header from '../ShereAble/Header'
+import Navbar from '../ShereAble/Navbar'
+import LeftSideNav from '../LeftSideNav/LeftSideNav';
+import RightSideNav from '../ShereAble/RightSideNav/RightSideNav';
+import BreakingNews from './BreakingNews/BreakingNews';
 const Home = () => {
   return (
     <>
    <div>
       <Header />
+      <BreakingNews />
       <Navbar />
       <div className='text-4xl font-poppins font-bold'>
         This is Home

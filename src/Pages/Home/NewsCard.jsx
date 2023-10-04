@@ -2,16 +2,16 @@ import { FaEye, FaStar, FaStarHalf } from "react-icons/fa";
 
 const NewsCard = ({news}) => {
     console.log(news)
-const {title, thumbnail_url,details,total_view,rating} = news;
+const {title, thumbnail_url,details,total_view,rating,image_url} = news;
 
 
   return (
     <div className='w-full px-2'>
       <div className="bg-white rounded-lg mb-5">
         <a href="#">
-          <img className="rounded-t-lg mx-auto" src={thumbnail_url} alt="" />
+          <img className="rounded-t-lg mx-auto p-2" src={image_url} alt="" />
         </a>
-        <div className="p-5">
+        <div className="p-4">
           <a href="#">
             <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2">{title}</h5>
           </a>

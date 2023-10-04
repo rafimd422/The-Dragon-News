@@ -6,6 +6,7 @@ import Register from "../Pages/Register/Register";
 import axios from 'axios';
 import NewsDetail from "../Pages/NewsDetail/NewsDetail";
 import PrivateRoute from "../contextProvider/PrivateRoute/PrivateRoute";
+import About from "../Pages/About/About";
 
 const routes = createBrowserRouter([
     {
@@ -20,6 +21,7 @@ loader: () => axios.get("/news.json")
         {
 path: '/news/:id',
 element: <PrivateRoute><NewsDetail /></PrivateRoute>,
+loader: () => axios.get('/news.json')
       },
         {
 path: '/login',
@@ -28,6 +30,10 @@ element: <Login />
         {
 path: '/register',
 element: <Register />
+      },
+        {
+path: '/about',
+element: <About />
       },
     ]
     },

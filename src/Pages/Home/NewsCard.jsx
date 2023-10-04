@@ -3,7 +3,7 @@ import { FaEye, FaStar, FaStarHalf } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 
 const NewsCard = ({ news }) => {
-  const { title, details, total_view, rating, image_url, author,category_id } = news;
+  const { title, details, total_view, rating, image_url, author,_id } = news;
 
   return (
     <div className="w-full px-2 shadow-sm">
@@ -39,7 +39,7 @@ const NewsCard = ({ news }) => {
             </h5>
           </a>
           {details.length > 200 ?
-            <p className="text-neutral-500 text-base mb-3">{details.slice(0,200)} <Link to={`/news/${category_id}`} className="text-orange-400
+            <p className="text-neutral-500 text-base mb-3">{details.slice(0,200)} <Link to={`/news/${_id}`} className="text-orange-400
             text-base
             font-semibold">Read more...</Link></p>
           :

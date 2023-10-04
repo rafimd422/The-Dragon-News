@@ -3,6 +3,7 @@ import Root from "../Layout/Root";
 import Home from './../Pages/Home/Home';
 import Login from "../Pages/LogIn/Login";
 import Register from "../Pages/Register/Register";
+import axios from 'axios';
 
 const routes = createBrowserRouter([
     {
@@ -11,7 +12,8 @@ const routes = createBrowserRouter([
       children: [
         {
 path: '/',
-element: <Home />
+element: <Home />,
+loader: () => axios.get("news.json")
       },
         {
 path: '/login',

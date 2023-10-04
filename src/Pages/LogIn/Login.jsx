@@ -1,13 +1,14 @@
 import { useContext } from 'react';
 import Navbar from './../ShereAble/Navbar';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { OurContext } from '../../contextProvider/AuthContext';
 
 const Login = () => {
 
 const {signIn} = useContext(OurContext)
 
-
+const location = useLocation()
+console.log(location)
 const navigate = useNavigate();
 
 const handleLogIn = (e) => {
@@ -19,7 +20,7 @@ const handleLogIn = (e) => {
     .then(result => {
       const user = result.user
       console.log(user)
-      navigate('/')
+      navigate(location?.state ? location.state : '/')
     })
     .catch(error =>{
       console.log(error.message)

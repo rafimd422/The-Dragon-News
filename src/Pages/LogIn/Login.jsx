@@ -1,18 +1,32 @@
+import { useContext } from 'react';
 import Navbar from './../ShereAble/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { OurContext } from '../../contextProvider/AuthContext';
 
 const Login = () => {
 
-
-const handleLogIn = () =>{
-  e.preventDefault()
-  console.log(form.currentData())
-}
+const {signIn} = useContext(OurContext)
 
 
+const navigate = useNavigate();
 
-
-
+const handleLogIn = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const email = form.get('email');
+    const password = form.get('password');
+    signIn(email, password)
+    .then(result => {
+      const user = result.user
+      console.log(user)
+      navigate('/')
+    })
+    .catch(error =>{
+      console.log(error.message)
+    })
+    
+  }
+  
   return (
 <>
 
@@ -37,7 +51,7 @@ const handleLogIn = () =>{
           </label>
         </div>
         <div className="form-control mt-6">
-          <button type='submit' className="btnhover:text-black text-center text-white text-lg font-semibold hover:bg-slate-400 bg-neutral-700 rounded-[5px] p-2">Login</button>
+          <button type='submit' className="btn hover:text-black text-center text-white text-lg font-semibold hover:bg-slate-400 bg-neutral-700 rounded-[5px] p-2">Login</button>
         </div>
         <p className='text-neutral-500 text-base font-semibold text-center my-2'>Dont't Have An Account ? Please <Link to={'/register'} className='text-blue-600'>Register</Link> </p>
 </form>

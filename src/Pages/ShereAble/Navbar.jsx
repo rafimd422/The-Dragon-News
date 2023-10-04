@@ -1,20 +1,30 @@
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import userDefaultPic from '../../assets/user.png'
+import { useContext } from "react"
+import { OurContext } from "../../contextProvider/AuthContext"
+import { signOut } from "firebase/auth"
+import auth from "../../firebase.config"
+import { ToastContainer, toast } from "react-toastify"
 
 const Navbar = () => {
 
 
 
-
-
+const {user} = useContext(OurContext)
 
 const NavLinks = <>
 <li><NavLink to={'/'}>Home</NavLink></li>
 <li><NavLink to={'/about'}>About</NavLink></li>
 <li><NavLink to={'/career'}>Career</NavLink></li>
  </>
-
-
+  const navigate = useNavigate();
+const handleSignOut = () =>{
+  signOut(auth).then(() => {
+    navigate('/');
+  }).catch((error) => {
+    console.log('error' , error)
+  });
+}
 
 
 
@@ -42,9 +52,18 @@ const NavLinks = <>
           <img src={userDefaultPic} />
         </div>
       </label>
-    <Link to={'/login'} className="btn hover:bg-neutral-800 bg-neutral-700 text-teal-50">Log In</Link>
+      {user ? ( 
+  <button onClick={handleSignOut} className="btn hover:bg-neutral-800 bg-neutral-700 text-teal-50"> 
+    Log Out
+  </button>
+) : (
+  <Link to={'/login'} className="btn hover:bg-neutral-800 bg-neutral-700 text-teal-50">
+    Log In
+  </Link>
+)}
   </div>
 </div>
+
   )
 }
 

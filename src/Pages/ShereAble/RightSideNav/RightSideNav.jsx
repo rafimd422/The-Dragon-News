@@ -4,8 +4,9 @@ import Qzone from "./Qzone";
 const RightSideNav = () => {
   return (
     <>
+    <div className="flex sm:flex-col flex-col-reverse">
     {/*Social LogIn section */}
-    <div className="mb-6 p-2 text-center me-2">
+    <div className="mb-6 p-2 text-center me-2 ">
       <h3 className='text-2xl mb-6 font-bold md:text-start md:ms-4'>Login With</h3>
       <button type="button" className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-2 focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
       <FaGoogle className="me-2" />
@@ -41,7 +42,7 @@ Sign in with Github
 {/* Q -Zone section */}
 <Qzone />
 
-
+</div>
     </>
   )
 }

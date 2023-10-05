@@ -39,9 +39,9 @@ const NewsCard = ({ news }) => {
             </h5>
           </a>
           {details.length > 200 ?
-            <p className="text-neutral-500 text-base mb-3">{details.slice(0,200)} <Link to={`/news/${_id}`} className="text-orange-400
+            <p className="text-neutral-500 text-base mb-3">{details.slice(0,200)} <Link to={`/news/${_id}`} className="text-green-700
             text-base
-            font-semibold">Read more...</Link></p>
+            font-bold">Read more...</Link></p>
           :
           <p className="text-neutral-500 text-base mb-3">{details}</p>
           }

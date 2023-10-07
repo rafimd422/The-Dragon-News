@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react"
 import auth from './../firebase.config';
-import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
 
 export const OurContext = createContext(null)
@@ -20,6 +20,11 @@ const signIn = (email,password) => {
 // Varification 
 const verify = () => {
    return sendEmailVerification(auth.currentUser)
+}
+// Google Login 
+const GoogleLogin = () => {
+  const provider = new GoogleAuthProvider();
+  signInWithPopup(auth, provider)
 }
 
 useEffect(()=>{
@@ -58,7 +63,7 @@ console.log('user in the auth state', user)
 
 
 const authInfo = {
-    user, signUp,signIn,verify
+    user, signUp,signIn,verify,GoogleLogin
 }
 
   return (

@@ -1,14 +1,53 @@
 import { FaFacebook, FaGithub, FaGoogle, FaInstagram, FaTwitter } from "react-icons/fa";
 import Qzone from "./Qzone";
+import { useContext } from "react";
+import { OurContext } from "../../../contextProvider/AuthContext";
+import { ToastContainer, toast } from "react-toastify";
 
 const RightSideNav = () => {
+
+const {GoogleLogin} = useContext(OurContext);
+
+const googleLogin = () =>{
+  GoogleLogin()
+  .then(result =>{
+    const user = result.user;
+    console.log(user)
+    toast.success('You have successfully Logged in', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
+  }
+  )
+  .catch(error =>{
+    console.log(error.message)
+    toast.success(`User Not Found`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
+  })
+}
+
+
   return (
     <>
     <div className="flex sm:flex-col flex-col-reverse">
     {/*Social LogIn section */}
     <div className="mb-6 p-2 text-center me-2 ">
       <h3 className='text-2xl mb-6 font-bold md:text-start md:ms-4'>Login With</h3>
-      <button type="button" className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-2 focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
+      <button onClick={googleLogin} type="button" className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-2 focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
       <FaGoogle className="me-2" />
 Sign in with Google
 </button>
@@ -36,6 +75,18 @@ Sign in with Github
         <FaInstagram/>
         <p className="text-neutral-500 text-base font-medium leading-[30px]"><a href="http://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></p>
 </div>
+<ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+/>
     </div>
 
 

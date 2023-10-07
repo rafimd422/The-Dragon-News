@@ -6,7 +6,7 @@ import LeftCards from './LeftCards';
 const LeftSideNav = ({category, sortingCategory}) => {
 
   return (
-<div>
+<div className='md:block hidden'>
   <h2 className="text-neutral-700 text-xl font-semibold font-['Poppins'] leading-[30px] mb-4 ms-2">All Caterogy</h2>
 <div>
 {category.map(category => <button 

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import Navbar from './../ShereAble/Navbar';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { OurContext } from '../../contextProvider/AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
 
@@ -20,12 +21,25 @@ const handleLogIn = (e) => {
     .then(result => {
       const user = result.user
       console.log(user)
+
+      setTimeout(()=>{
+        toast.success('Log In successfull', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+      }, 2000)
+
       navigate(location?.state ? location.state : '/')
     })
     .catch(error =>{
       console.log(error.message)
     })
-    
   }
   
   return (
@@ -58,12 +72,18 @@ const handleLogIn = (e) => {
 </form>
 </div>
 
-
-
-
-
-
-
+<ToastContainer
+position="top-center"
+autoClose={5000}
+hideProgressBar
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+/>
 
 </>
   )

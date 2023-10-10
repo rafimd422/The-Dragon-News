@@ -7,11 +7,13 @@ import axios from 'axios';
 import NewsDetail from "../Pages/NewsDetail/NewsDetail";
 import PrivateRoute from "../contextProvider/PrivateRoute/PrivateRoute";
 import About from "../Pages/About/About";
+import ErrorPage from "../Pages/ErrorPage";
 
 const routes = createBrowserRouter([
     {
       path: "/",
       element: <Root />,
+      errorElement: <ErrorPage />,
       children: [
         {
 path: '/',

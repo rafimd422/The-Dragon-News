@@ -2,9 +2,10 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../ShereAble/Navbar'
 import { OurContext } from '../../contextProvider/AuthContext'
+import { ToastContainer, toast } from 'react-toastify'
 
 const Register = () => {
-const {signUp,verify} = useContext(OurContext)
+const {signUp} = useContext(OurContext)
 
 
     const handleRegister = (e) => {
@@ -19,18 +20,24 @@ const {signUp,verify} = useContext(OurContext)
         .then(result => {
           const user = result.user
           console.log(user)
+          setTimeout(()=>{
+            toast.success('Registration Successfull', {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+              });
+          }, 2000)
         })
         .catch(error =>{
           console.log(error.message)
         })
-        verify()
-        .then(()=>{
-          console.log('Email Verification Sent!')
-        })
-        .catch(error =>{
-          console.log(error)
-        })
       }
+
   return (
     <>
 <Navbar />
@@ -70,7 +77,18 @@ const {signUp,verify} = useContext(OurContext)
 </form>
 </div>
 
-
+<ToastContainer
+position="top-center"
+autoClose={5000}
+hideProgressBar
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+/>
 
 
 </>

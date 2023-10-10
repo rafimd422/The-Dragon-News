@@ -3,6 +3,7 @@ import Header from './../ShereAble/Header';
 import RightSideNav from './../ShereAble/RightSideNav/RightSideNav';
 import Navbar from './../ShereAble/Navbar';
 import { useLoaderData, useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const NewsDetail = () => {
     const {id} = useParams()
@@ -13,6 +14,9 @@ console.log(mainDetails)
 
   return (
     <>
+                <Helmet>
+        <title>News Details | The Dragon News</title>
+      </Helmet>
     <Header />
     <Navbar />
     <div className='grid sm:grid-cols-4 justify-center'>

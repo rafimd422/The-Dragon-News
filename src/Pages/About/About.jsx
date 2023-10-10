@@ -1,10 +1,14 @@
 import React from 'react';
 import Header from '../ShereAble/Header';
 import Navbar from '../ShereAble/Navbar';
+import { Helmet } from 'react-helmet-async';
 
 const About = () => {
   return (
     <div>
+            <Helmet>
+        <title>About | The Dragon News</title>
+      </Helmet>
         <Header/>
         <Navbar />
       <div className="container mx-auto px-8 my-12">

@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom'
 import Navbar from '../ShereAble/Navbar'
 import { OurContext } from '../../contextProvider/AuthContext'
 import { ToastContainer, toast } from 'react-toastify'
+import { useState } from 'react'
 
 const Register = () => {
+
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
 const {signUp} = useContext(OurContext)
 
 
@@ -15,26 +20,29 @@ const {signUp} = useContext(OurContext)
         const url = form.get('URL');
         const email = form.get('email');
         const password = form.get('password');
-        console.log(name, url,email, password);
+        const uppercaseRegex = /[A-Z]/;
+        setError('');
+        setSuccess('');
+
+        if (!uppercaseRegex.test(password)) {
+          setError('Password should contain at least one uppercase letter');
+          return;
+        } else if (password.length < 6) {
+          setError('Password should be at least 6 characters');
+          return;
+        }
+
         signUp(email,password)
         .then(result => {
           const user = result.user
           console.log(user)
           setTimeout(()=>{
-            toast.success('Registration Successfull', {
-              position: "top-center",
-              autoClose: 5000,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "dark",
-              });
+            setSuccess('Registration Successfull')
           }, 2000)
         })
         .catch(error =>{
-          console.log(error.message)
+          const errorMessageWithoutFirebase = error.message.replace('Firebase:', '');
+          setError(errorMessageWithoutFirebase)
         })
       }
 
@@ -72,23 +80,14 @@ const {signUp} = useContext(OurContext)
         </div>
         <div className="form-control mt-6">
           <button type='submit' className="btnhover:text-black text-center text-white text-lg font-semibold hover:bg-slate-400 bg-neutral-700 rounded-[5px] p-2">Register</button>
+          {error && <p className="text-red-700">{error}</p>}
+        {success && <p className="text-success">{success}</p>}
         </div>
         <p className='text-neutral-500 text-base font-semibold text-center my-2'>Already Have An Account ? Please <Link to={'/login'} className='text-blue-600'>Log in</Link> </p>
 </form>
+
 </div>
 
-<ToastContainer
-position="top-center"
-autoClose={5000}
-hideProgressBar
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="dark"
-/>
 
 
 </>

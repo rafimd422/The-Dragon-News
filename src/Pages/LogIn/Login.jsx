@@ -2,9 +2,12 @@ import { useContext } from 'react';
 import Navbar from './../ShereAble/Navbar';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { OurContext } from '../../contextProvider/AuthContext';
-import { ToastContainer, toast } from 'react-toastify';
+import { useState } from 'react';
 
 const Login = () => {
+
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
 const {signIn} = useContext(OurContext)
 
@@ -17,31 +20,32 @@ const handleLogIn = (e) => {
     const form = new FormData(e.currentTarget);
     const email = form.get('email');
     const password = form.get('password');
+    setError('');
+    setSuccess('');
     signIn(email, password)
     .then(result => {
       const user = result.user
       console.log(user)
-
       setTimeout(()=>{
-        toast.success('Log In successfull', {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-          });
+        setSuccess('Log in Successful')
       }, 2000)
 
       navigate(location?.state ? location.state : '/')
     })
     .catch(error =>{
       console.log(error.message)
-    })
-  }
+      if(error.message === "Firebase: Error (auth/invalid-login-credentials)."){
+          const errormessage = 'Invalid login credentials'
+          setError(errormessage)
+      }else if(error.message ==="Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests)."){
+          const errmessage = 'Access to this account has been temporarily disabled due to many failed login attempts. You can try again later.'
+          setError(errmessage)
+      }    else{
+        setError(error.message)
+    }
   
+  })
+}
   return (
 <>
 
@@ -67,23 +71,12 @@ const handleLogIn = (e) => {
         </div>
         <div className="form-control mt-6">
           <button type='submit' className="btn hover:text-black text-center text-white text-lg font-semibold hover:bg-slate-400 bg-neutral-700 rounded-[5px] p-2">Login</button>
+          {error && <p className="text-red-700">{error}</p>}
+        {success && <p className="text-success">{success}</p>}
         </div>
         <p className='text-neutral-500 text-base font-semibold text-center my-2'>Dont't Have An Account ? Please <Link to={'/register'} className='text-blue-600'>Register</Link> </p>
 </form>
 </div>
-
-<ToastContainer
-position="top-center"
-autoClose={5000}
-hideProgressBar
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="dark"
-/>
 
 </>
   )
